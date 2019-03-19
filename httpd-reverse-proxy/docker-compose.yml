@@ -1,0 +1,29 @@
+version: '2'
+services:
+
+  apache:
+    build:
+      context: './httpd/'
+      args:
+       APACHE_VERSION: 2.4.32
+    depends_on:
+      - nginx
+    ports:
+      - "80:80"
+    container_name: apache
+
+  nginx: 
+    image: nginx:1.13
+    volumes:
+    - ./nginx/service1:/usr/share/nginx/html:ro
+    ports:
+      - "81:80"    
+    container_name: nginx
+
+  nginx2: 
+    image: nginx:1.13
+    volumes:
+    - ./nginx/service2:/usr/share/nginx/html:ro
+    ports:
+      - "82:80"    
+    container_name: nginx2  
